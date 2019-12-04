@@ -95,10 +95,13 @@ router.post(
           { $set: profileFields },
           { new: true }
         );
+
+        return res.json(profile)
       }
 
       //create profile
-      profile= new Profile(profileFields)
+      profile = new Profile(profileFields)
+
       await profile.save();
       res.json(profile)
     } catch (err) {
@@ -107,5 +110,56 @@ router.post(
     }
   }
 );
+
+//GET all profiles
+router.get('/', async (req, res) => {
+  try {
+    const profiles = await Profile.find().populate('user', ['name', 'avatar'])
+    res.json(profiles)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+})
+
+
+//GET one profile by id
+router.get('/user/:user_id', async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar'])
+
+    if (!profile) {
+      return res.status(400).json({ msg: 'Profile not found' })
+    }
+
+    res.json(profile)
+  } catch (err) {
+    console.error(err.message);
+
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Profile not found' })
+    }
+
+    res.status(500).send('Server Error');
+  }
+})
+
+//DELETE profile and posts
+router.delete('/', auth, async (req, res) => {
+  try {
+    //Remove profile
+    await Profile.findOneAndRemove({ user: req.user.id })
+
+    await User.findOneAndRemove({ _id: req.user.id })
+
+    res.json({ msg: 'User removed' })
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+})
+
+
+
 
 module.exports = router;
