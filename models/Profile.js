@@ -15,7 +15,7 @@ const ProfileSchema = new mongoose.Schema({
     type: String
   },
   status: {
-    type: String, 
+    type: String,
     required: true
   },
   skills: {
@@ -47,12 +47,12 @@ const ProfileSchema = new mongoose.Schema({
       },
       to: {
         type: Date,
-        required: true
+        required: false
       },
       current: {
-        type: Boolean, 
+        type: Boolean,
         default: false
-      }, 
+      },
       decription: {
         type: String
       }
