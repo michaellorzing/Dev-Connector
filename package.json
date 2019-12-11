@@ -12,6 +12,7 @@
     "mongoose": "^5.5.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.0.1",
     "request": "^2.88.0"
   },
@@ -19,7 +20,9 @@
     "build": "react-scripts build",
     "start": "node server",
     "eject": "react-scripts eject",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
     "extends": "react-app"
