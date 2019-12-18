@@ -13,6 +13,7 @@ export const Login = ({ login, isAuthenticated }) => {
   const {  email, password } = formData
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
+  console.log(formData)
 
   const onSubmit = async e =>{
     e.preventDefault();
