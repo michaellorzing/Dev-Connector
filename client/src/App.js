@@ -9,6 +9,8 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import PrivateRoute from './Components/Routing/PrivateRoute';
 import CreateProfile from './Components/Profile-Forms/CreateProfile';
 import EditProfile from './Components/Profile-Forms/EditProfile';
+import AddExperience from './Components/Profile-Forms/AddExperience';
+import AddEducation from './Components/Profile-Forms/AddEducation';
 import { loadUser } from './actions/auth';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -40,6 +42,16 @@ function App() {
 								exact
 								path='/edit-profile'
 								component={EditProfile}
+							/>
+							<PrivateRoute
+								exact
+								path='/add-experience'
+								component={AddExperience}
+							/>
+							<PrivateRoute
+								exact
+								path='/add-education'
+								component={AddEducation}
 							/>
 							<PrivateRoute
 								exact
