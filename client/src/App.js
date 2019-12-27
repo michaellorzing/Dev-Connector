@@ -13,6 +13,7 @@ import AddExperience from './Components/Profile-Forms/AddExperience';
 import AddEducation from './Components/Profile-Forms/AddEducation';
 import Profiles from './Components/Profiles/Profiles';
 import Profile from './Components/Profile/Profile';
+import Posts from './Components/Posts/Posts';
 import { loadUser } from './actions/auth';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -62,6 +63,7 @@ function App() {
 								path='/create-profile'
 								component={CreateProfile}
 							/>
+							<PrivateRoute exact path='/posts' component={Posts} />
 						</Switch>
 					</section>
 				</div>
